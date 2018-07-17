@@ -1,0 +1,10 @@
+#app-alert {
+  position: fixed;
+  top: 3px;
+  z-index: 1;
+  right: -1000px;
+  transition-duration: 0.5s;
+}
+#app-alert.active {
+  transform: translate3d(-1003px, 0px, 0);
+}

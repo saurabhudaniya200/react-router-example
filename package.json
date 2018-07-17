@@ -1,0 +1,30 @@
+{
+  "name": "react-router-example",
+  "version": "0.0.1",
+  "keywords": [],
+  "author": "Saurabh Udaniya",
+  "main": "index.js",
+  "dependencies": {
+    "faker": "^4.1.0",
+    "react": "15.5.3",
+    "react-dom": "15.5.3",
+    "react-router-dom": "4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.1.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "react-scripts": "^1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
