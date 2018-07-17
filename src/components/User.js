@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ReviewForm from './ReviewForm';
 import Review from './Review';
 import { ReviewStorage, UserStorage } from '../localstorage/models';
-import Alert from '../alert'
+import Alert from '../alert';
 
 class User extends Component {
   constructor(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { UserStorage } from '../localstorage/models';
-import Alert from '../alert'
+import Alert from '../alert';
 
 class EditUser extends Component {
   constructor(props) {

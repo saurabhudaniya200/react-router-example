@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SeedLoader from '../localstorage/seeds';
 import { UserStorage } from '../localstorage/models';
 import { Link } from 'react-router-dom';
-import Alert from '../alert'
+import Alert from '../alert';
 
 class Home extends Component {
   constructor(props) {
@@ -15,14 +15,14 @@ class Home extends Component {
     event.preventDefault();
     SeedLoader.load();
     this.resetState();
-    Alert.alert('Seed data loaded successfully!!!')
+    Alert.alert('Seed data loaded successfully!!!');
   }
 
   flushHandler = (event) => {
     event.preventDefault();
     SeedLoader.flush();
     this.resetState();
-    Alert.alert('localstorage cleared successfully!!!')
+    Alert.alert('localstorage cleared successfully!!!');
   }
 
   resetState = () => {

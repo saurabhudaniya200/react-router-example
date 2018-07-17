@@ -51,10 +51,6 @@ class Base {
     const data = JSON.parse(localStorage.getItem(this.collectionName));
     return data == null ? [] : data;
   }
-
-  alert(message) {
-    
-  }
 }
 
 export default Base;
