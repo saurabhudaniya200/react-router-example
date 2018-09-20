@@ -1,44 +1,36 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReviewForm from './ReviewForm';
+import NotFound from './NotFound'
 import Review from './Review';
-import { ReviewStorage, UserStorage } from '../localstorage/models';
-import Alert from '../alert';
+import { UserStorage } from '../localstorage/models';
+import { connect } from 'react-redux'
 
-class User extends Component {
+const mapStateToProps = state => {
+  return {reviews: state.reviews}
+}
+
+class ConnectedUser extends Component {
   constructor(props) {
     super(props);
     const user = UserStorage.find(parseInt(props.match.params.id, 10));
+    console.log(user)
     this.state = user;
-    this.state.reviews = ReviewStorage.getByKey('userId', user.id);
   }
-
-  onReviewSubmit = (data) => {
-    ReviewStorage.save(data);
-    this.resetReviews();
-    Alert.alert('Review added successfully!!!');
-  }
-
-  removeReviewHandler = (reviewId) => {
-    ReviewStorage.removeByKey('id', reviewId);
-    this.resetReviews();
-    Alert.alert('Review removed successfully!!!');
-  }
-
-  resetReviews = () => {
-    this.setState({ reviews: ReviewStorage.getByKey('userId', this.state.id) });
-  }
-
 
   render() {
     let reviewMessage;
 
     if (!this.state) {
-      return <h1>Sorry, but the user was not found</h1>;
+      return (
+        <NotFound></NotFound>
+      );
     }
 
-    if (this.state.reviews.length > 0) {
-      reviewMessage = <h4 className="text-primary">Showing {this.state.reviews.length} review(s)</h4>;
+    const reviews = this.props.reviews.filter((object) => object.userId === this.state.id);
+
+    if (reviews.length > 0) {
+      reviewMessage = <h4 className="text-primary">Showing {reviews.length} review(s)</h4>;
     }
     return (
       <div>
@@ -55,19 +47,21 @@ class User extends Component {
             <div className="col-md-7">
               {reviewMessage}
               {
-                this.state.reviews.map((review) => (
-                  <Review review={review} onRemove={this.removeReviewHandler} key={review.id}/>
+                reviews.map((review) => (
+                  <Review review={review} key={review.id}/>
                 ))
               }
             </div>
           ): '' }
           <div className="col-md-5">
-            <ReviewForm userName={this.state.name} userId={this.state.id} reviewSumbit={this.onReviewSubmit}/>
+            <ReviewForm userName={this.state.name} userId={this.state.id}/>
           </div>
         </div>
       </div>
     );
   }
 }
+
+const User = connect(mapStateToProps)(ConnectedUser)
 
 export default User;

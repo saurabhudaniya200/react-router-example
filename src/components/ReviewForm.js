@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { AddReview } from '../redux/actions'
+import Store from '../redux/store'
+window.store = Store
+window.AddReview = AddReview
 
-class ReviewForm extends Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    addReview: review => dispatch(AddReview(review)),
+  }
+}
+
+class ConnectedReviewForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +31,7 @@ class ReviewForm extends Component {
 
   submitReviewHandler = (event) => {
     event.preventDefault();
-    this.props.reviewSumbit(this.state);
+    this.props.addReview(this.state);
     this.setState({ name: '', review: '' });
   }
 
@@ -47,5 +58,7 @@ class ReviewForm extends Component {
     );
   }
 }
+
+const ReviewForm = connect(null, mapDispatchToProps)(ConnectedReviewForm);
 
 export default ReviewForm;

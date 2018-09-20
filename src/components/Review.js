@@ -1,6 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { RemoveReview } from '../redux/actions'
 
-const Review = (props) => {
+const mapDispatchToProps = dispatch => {
+  return { removeReview: (reviewId ) => dispatch(RemoveReview(reviewId)) }
+}
+
+const ConnectedReview = (props) => {
   const review = props.review;
 
   return (
@@ -10,7 +16,7 @@ const Review = (props) => {
         {review.review}
         <span className="text-danger float-right"
           style={{ cursor: 'pointer' }}
-          onClick={() => props.onRemove(review.id)}>
+          onClick={() => props.removeReview(review.id)}>
             &times;
         </span>
       </p>
@@ -20,5 +26,7 @@ const Review = (props) => {
     </blockquote>
   );
 };
+
+const Review = connect(null, mapDispatchToProps)(ConnectedReview)
 
 export default Review;
